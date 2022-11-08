@@ -34,3 +34,33 @@ class Solution:
             prev = cur
             cur = tmp
         return prev
+
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def _reverseList(prev, cur):
+            if cur is None:
+                return prev
+            tmp = cur.next
+            cur.next = prev
+            return _reverseList(cur, tmp)
+
+        return _reverseList(None, head)
+
+    # def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    #     if head is None or head.next is None:
+    #         return head
+    #
+    #     prev = self.reverseList(head.next)
+    #
+    #     head.next.next = head
+    #     head.next = None
+    #     return prev
+
+
+if __name__ == "__main__":
+    from helper import build_single_list_node
+
+    head = build_single_list_node([1, 2, 3, 4, 5])
+
+    s = Solution()
+    reversed_head = s.reverseList(head)
+    print(reversed_head)
